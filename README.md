@@ -15,6 +15,9 @@ Current heuristics applied:
 
 All three flows, Dev, QA and Doc have only three states: ToDo, Doing, Done.
 
+> Note: we use the [checkmark symbol](http://www.fileformat.info/info/unicode/char/2713/browsertest.htm) to denote done items.
+
+
 ## Dev Flow
 
 Dev items are grouped by milestone. No labels are required for the flow.
@@ -50,7 +53,6 @@ Doc is an opt-in activity. Items are also grouped by release label. Labels:
 - +Doc: the issue needs user documentation.
 - ✓Doc: documentation has been completed. Developers could use this to verify the docs.
 
-> Note: we use the [checkmark symbol](http://www.fileformat.info/info/unicode/char/2713/browsertest.htm) to denote done items.
 
 Flow states:
 - ToDo: unassigned closed items with +Doc label 
