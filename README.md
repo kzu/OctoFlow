@@ -41,7 +41,7 @@ QA is a required activity with optional opt-out. Items are grouped by release la
 QA items are those without -QA label and closed. +QA label is optional.
 
 Flow states:
-- ToDo: QA items without the ✓QA label
+- ToDo: unassigned QA items without the ✓QA label
 - Doing: assigned QA items without the ✓QA label
 - Done: QA items with the ✓QA label
 
