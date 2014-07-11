@@ -35,7 +35,6 @@ Flow states:
 
 QA is a required activity with optional opt-out. Items are grouped by release label. Labels: 
 - -QA: explicit opt-out of QA.
-- +QA: optional label, since everything without -QA needs QA.
 - ✓QA: the issue has been verified by QA.
 
 QA items are those without -QA label and closed. +QA label is optional.
