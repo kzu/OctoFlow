@@ -7,7 +7,7 @@
 
        http://www.apache.org/licenses/LICENSE-2.0
 */
-namespace GitFlowProcess
+namespace OctoFlow
 {
 	using CLAP;
 	using CLAP.Validation;
@@ -26,6 +26,11 @@ namespace GitFlowProcess
 			Console.WriteLine(help);
 		}
 
+		[Verb(Description = "Generates a status report from GitHub issues.", IsDefault = true)]
+		void Generate()
+		{
+		}
+
 		[Verb(Description = "Get the application version.")]
 		void Version()
 		{
@@ -41,11 +46,6 @@ namespace GitFlowProcess
 			Console.WriteLine("]");
 
 			Console.WriteLine(asm.GetCustomAttribute<AssemblyCopyrightAttribute>().Copyright);
-		}
-
-		[Verb(Description = "Generates a status report from GitHub issues matching the given parameters.", IsDefault = true)]
-		void Generate()
-		{
 		}
 	}
 }

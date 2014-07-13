@@ -1,4 +1,4 @@
-﻿namespace GitFlowProcess
+﻿namespace OctoFlow
 {
 	using Octokit;
 	using Octokit.Internal;

@@ -1,4 +1,4 @@
-﻿namespace GitFlowProcess
+﻿namespace OctoFlow
 {
 	using System;
 	using System.Collections.Generic;

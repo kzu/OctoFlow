@@ -8,29 +8,15 @@
        http://www.apache.org/licenses/LICENSE-2.0
 */
 
-namespace GitFlowProcess
+namespace OctoFlow
 {
 	using CLAP;
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
 
-	class Program
+    class Program
 	{
 		static void Main(string[] args)
 		{
 			Parser.Run(args, new App());
-		}
-
-		public void Write()
-		{
-			Console.WriteLine();
-		}
-
-		public void Do()
-		{
 		}
 	}
 }

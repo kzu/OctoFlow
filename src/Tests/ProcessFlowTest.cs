@@ -1,6 +1,6 @@
-﻿namespace GitFlowProcess
+﻿namespace OctoFlow
 {
-    using GitFlowProcess;
+    using OctoFlow;
     using Octokit;
     using System;
     using System.IO;

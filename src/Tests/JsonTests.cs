@@ -1,4 +1,4 @@
-﻿namespace GitFlowProcess
+﻿namespace OctoFlow
 {
 	using Newtonsoft.Json;
 	using Octokit;
