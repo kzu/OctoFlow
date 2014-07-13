@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- 
+﻿/*
    Copyright 2014 Daniel Cazzulino
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -7,9 +6,14 @@
    You may obtain a copy of the License at
 
        http://www.apache.org/licenses/LICENSE-2.0
--->
-<configuration>
-    <startup> 
-        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5"/>
-    </startup>
-</configuration>
+*/
+namespace GitFlowProcess
+{
+    public enum IssueType
+    {
+        Unknown,
+        Story,
+        Task,
+        Bug,
+    }
+}

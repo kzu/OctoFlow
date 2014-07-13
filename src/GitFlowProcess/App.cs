@@ -43,5 +43,10 @@ namespace GitFlowProcess
 			Console.WriteLine(asm.GetCustomAttribute<AssemblyCopyrightAttribute>().Copyright);
 		}
 
+		[Verb(Description = "Generates a status report from GitHub issues matching the given parameters.", IsDefault = true)]
+		void Generate()
+		{
+		}
+
 	}
 }

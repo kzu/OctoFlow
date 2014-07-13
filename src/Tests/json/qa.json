@@ -1,0 +1,77 @@
+﻿[
+  {
+    "number": 1,
+    "state": "open",
+    "title": "A cool story",
+    "body": "A story",
+    "labels": [
+      {
+        "name": "Story"
+      },
+      {
+        "name": "v3.3"
+      }
+    ],
+    "assignee": {
+      "login": "kzu"
+    },
+    "milestone": {
+      "number": 1,
+      "state": "open",
+      "title": "Sprint 1"
+    }
+  },
+  {
+    "number": 2,
+    "state": "closed",
+    "title": "A task",
+    "body": "A task, for story #1",
+    "labels": [
+      {
+        "name": "Task"
+      },
+      {
+        "name": "+QA"
+      },
+      {
+        "name": "v3.3"
+      }
+    ],
+    "milestone": {
+      "number": 1,
+      "state": "open",
+      "title": "v1.0"
+    }
+  },
+  {
+    "number": 3,
+    "state": "closed",
+    "title": "Another task",
+    "body": "A non-QA task, for story #1",
+    "labels": [
+      {
+        "name": "Task"
+      },
+      {
+        "name": "-QA"
+      },
+      {
+        "name": "v3.3"
+      }
+    ]
+  },
+  {
+    "number": 4,
+    "state": "open",
+    "title": "Yet another task",
+    "body": "An open task, for story #1",
+    "labels": [
+      {
+        "name": "Task"
+      },
+      {
+        "name": "v3.3"
+      }
+    ]
+  }
+]

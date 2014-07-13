@@ -7,6 +7,7 @@
 
        http://www.apache.org/licenses/LICENSE-2.0
 */
+
 namespace GitFlowProcess
 {
 	using CLAP;
@@ -18,9 +19,18 @@ namespace GitFlowProcess
 
 	class Program
 	{
-		static void Main (string[] args)
+		static void Main(string[] args)
 		{
 			Parser.Run(args, new App());
+		}
+
+		public void Write()
+		{
+			Console.WriteLine();
+		}
+
+		public void Do()
+		{
 		}
 	}
 }
