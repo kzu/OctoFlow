@@ -81,9 +81,9 @@
     <None Include="Token" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OctoFlow\OctoFlow.csproj">
+    <ProjectReference Include="..\OctoFlow\OctoFlow.Core.csproj">
       <Project>{6257d573-ac42-44ca-9908-3db7e49803cc}</Project>
-      <Name>OctoFlow</Name>
+      <Name>OctoFlow.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

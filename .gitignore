@@ -173,3 +173,4 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 /src/Tests/Token
+/src/OctoFlow.Console/App.Debug.config

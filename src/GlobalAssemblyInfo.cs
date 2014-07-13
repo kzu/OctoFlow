@@ -11,7 +11,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle ("GitHub Process Status Generator")]
+[assembly: AssemblyTitle ("OctoFlow Generator")]
 [assembly: AssemblyProduct ("OctoFlow")]
 [assembly: AssemblyDescription ("Process flow status generator based on GitFlow and using GitHub APIs")]
 [assembly: AssemblyCopyright ("Copyright © Daniel Cazzulino 2014. All rights reserved.")]

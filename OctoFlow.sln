@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctoFlow.Console", "src\Oct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctoFlow.Tests", "src\OctoFlow.Tests\OctoFlow.Tests.csproj", "{60496279-40A9-4E6B-9B7A-7E1BDEBEEAC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctoFlow", "src\OctoFlow\OctoFlow.csproj", "{6257D573-AC42-44CA-9908-3DB7E49803CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctoFlow.Core", "src\OctoFlow\OctoFlow.Core.csproj", "{6257D573-AC42-44CA-9908-3DB7E49803CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
