@@ -1,0 +1,74 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.ComponentModel" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="OctoFlow" #>
+<#
+    foreach (var group in Issues)
+    {
+#>
+
+# <#= group.Key #>
+
+<#      
+        foreach (var issue in group)
+        {
+			Render(issue);            
+        }
+    }
+#>
+<#+
+public IEnumerable<IGrouping<string, ProcessIssue>> Issues { get; private set; }
+public ProcessType Type { get; private set; }
+
+private string GetTitle()
+{
+	return typeof(ProcessType)
+		.GetMember(Type.ToString())
+		.Select(m => m
+			.GetCustomAttributes(false)
+			.OfType<DescriptionAttribute>()
+			.Select(d => d.Description)
+			.First())
+		.First();
+}
+
+private void Render(ProcessIssue issue)
+{
+    if (issue.Type == IssueType.Story)
+    {
+#>
+## Story #<#= issue.Issue.Number #>
+<#=issue.State == ProcessState.Done ? "- [x]" : (issue.State == ProcessState.Ignore ? "" : "- [ ]") #><#= issue.Issue.Title #>
+<#+
+		if (issue.Children.Any(i => i.State != ProcessState.Ignore))
+        {
+#>
+
+### Issues
+
+<#+                     
+			foreach (var child in issue.Children.Where(i => i.State != ProcessState.Ignore))
+			{
+				Render(child);
+			}    
+        }
+    }
+    else
+    {
+#>
+- [<#=issue.State == ProcessState.Done ? "x" : " " #>] #<#= issue.Issue.Number #>: <#= issue.Issue.Title #>
+<#+
+
+		foreach (var child in issue.Children.Where(i => i.State != ProcessState.Ignore))
+		{
+            PushIndent("  ");
+			Render(child);
+            PopIndent();
+		}
+	}
+}
+#>
