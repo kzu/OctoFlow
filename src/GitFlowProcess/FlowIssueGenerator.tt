@@ -6,12 +6,11 @@
 <#@ import namespace="System.Reflection" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="GitFlowProcess" #>
-{
-  "title": "<#= GetTitle() #>",
-  "body": "<#
+<#
     foreach (var group in Issues)
     {
 #>
+
 # <#= group.Key #>
 
 <#      
@@ -21,14 +20,9 @@
         }
     }
 #>
-
-<!---
-@octoflow:{"Type":"<#= Type #>"}
--->"
-}
 <#+
-public IEnumerable<IGrouping<string, ProcessIssue>> Issues { get; set; }
-public ProcessType Type { get; set; }
+public IEnumerable<IGrouping<string, ProcessIssue>> Issues { get; private set; }
+public ProcessType Type { get; private set; }
 
 private string GetTitle()
 {
@@ -50,14 +44,14 @@ private void Render(ProcessIssue issue)
 ## Story #<#= issue.Issue.Number #>
 <#=issue.State == ProcessState.Done ? "- [x]" : (issue.State == ProcessState.Ignore ? "" : "- [ ]") #><#= issue.Issue.Title #>
 <#+
-		if (issue.Children.Any())
+		if (issue.Children.Any(i => i.State != ProcessState.Ignore))
         {
 #>
 
 ### Issues
 
 <#+                     
-			foreach (var child in issue.Children)
+			foreach (var child in issue.Children.Where(i => i.State != ProcessState.Ignore))
 			{
 				Render(child);
 			}    
@@ -69,7 +63,7 @@ private void Render(ProcessIssue issue)
 - [<#=issue.State == ProcessState.Done ? "x" : " " #>] #<#= issue.Issue.Number #>: <#= issue.Issue.Title #>
 <#+
 
-		foreach (var child in issue.Children)
+		foreach (var child in issue.Children.Where(i => i.State != ProcessState.Ignore))
 		{
             PushIndent("  ");
 			Render(child);

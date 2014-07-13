@@ -23,19 +23,15 @@
 
 			var flow = process.GetFlow(ProcessType.QA);
 
-			var generator = new FlowIssueGenerator
-			{
-				Issues = flow, 
-				Type = ProcessType.Dev,
-			};
+			var generator = new FlowIssueGenerator(ProcessType.QA, flow);
 
-			var json = generator.TransformText();
+            var body = generator.Render();
 
-			Console.WriteLine(json);
+			Console.WriteLine(body);
 
-			var obj = JObject.Parse(json);
+            //var obj = JObject.Parse(body);
 
-			Console.WriteLine(obj.ToString(Formatting.Indented));
+            //Console.WriteLine(obj.ToString(Formatting.Indented));
 		}
 	}
 }

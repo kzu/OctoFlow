@@ -31,16 +31,8 @@ namespace GitFlowProcess
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("{\r\n  \"title\": \"");
             
-            #line 10 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(GetTitle()));
-            
-            #line default
-            #line hidden
-            this.Write("\",\r\n  \"body\": \"");
-            
-            #line 11 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
+            #line 9 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
 
     foreach (var group in Issues)
     {
@@ -48,16 +40,16 @@ namespace GitFlowProcess
             
             #line default
             #line hidden
-            this.Write("# ");
+            this.Write("\r\n# ");
             
-            #line 15 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
+            #line 14 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(group.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\r\n");
             
-            #line 17 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
+            #line 16 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
       
         foreach (var issue in group)
         {
@@ -68,21 +60,13 @@ namespace GitFlowProcess
             
             #line default
             #line hidden
-            this.Write("\r\n<!---\r\n@octoflow:{\"Type\":\"");
-            
-            #line 26 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Type));
-            
-            #line default
-            #line hidden
-            this.Write("\"}\r\n-->\"\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 29 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
+        #line 23 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
 
-public IEnumerable<IGrouping<string, ProcessIssue>> Issues { get; set; }
-public ProcessType Type { get; set; }
+public IEnumerable<IGrouping<string, ProcessIssue>> Issues { get; private set; }
+public ProcessType Type { get; private set; }
 
 private string GetTitle()
 {
@@ -105,67 +89,67 @@ private void Render(ProcessIssue issue)
         #line default
         #line hidden
         
-        #line 49 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
+        #line 43 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
 this.Write("## Story #");
 
         
         #line default
         #line hidden
         
-        #line 50 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
+        #line 44 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(issue.Issue.Number));
 
         
         #line default
         #line hidden
         
-        #line 50 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
+        #line 44 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
 this.Write("\r\n");
 
         
         #line default
         #line hidden
         
-        #line 51 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
+        #line 45 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(issue.State == ProcessState.Done ? "- [x]" : (issue.State == ProcessState.Ignore ? "" : "- [ ]")));
 
         
         #line default
         #line hidden
         
-        #line 51 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
+        #line 45 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(issue.Issue.Title));
 
         
         #line default
         #line hidden
         
-        #line 51 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
+        #line 45 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
 this.Write("\r\n");
 
         
         #line default
         #line hidden
         
-        #line 52 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
+        #line 46 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
 
-		if (issue.Children.Any())
+		if (issue.Children.Any(i => i.State != ProcessState.Ignore))
         {
 
         
         #line default
         #line hidden
         
-        #line 55 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
+        #line 49 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
 this.Write("\r\n### Issues\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 59 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
+        #line 53 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
                      
-			foreach (var child in issue.Children)
+			foreach (var child in issue.Children.Where(i => i.State != ProcessState.Ignore))
 			{
 				Render(child);
 			}    
@@ -178,59 +162,59 @@ this.Write("\r\n### Issues\r\n\r\n");
         #line default
         #line hidden
         
-        #line 68 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
+        #line 62 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
 this.Write("- [");
 
         
         #line default
         #line hidden
         
-        #line 69 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
+        #line 63 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(issue.State == ProcessState.Done ? "x" : " "));
 
         
         #line default
         #line hidden
         
-        #line 69 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
+        #line 63 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
 this.Write("] #");
 
         
         #line default
         #line hidden
         
-        #line 69 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
+        #line 63 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(issue.Issue.Number));
 
         
         #line default
         #line hidden
         
-        #line 69 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
+        #line 63 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
 this.Write(": ");
 
         
         #line default
         #line hidden
         
-        #line 69 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
+        #line 63 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(issue.Issue.Title));
 
         
         #line default
         #line hidden
         
-        #line 69 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
+        #line 63 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
 this.Write("\r\n");
 
         
         #line default
         #line hidden
         
-        #line 70 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
+        #line 64 "C:\Code\Personal\GitFlowProcess\src\GitFlowProcess\FlowIssueGenerator.tt"
 
 
-		foreach (var child in issue.Children)
+		foreach (var child in issue.Children.Where(i => i.State != ProcessState.Ignore))
 		{
             PushIndent("  ");
 			Render(child);

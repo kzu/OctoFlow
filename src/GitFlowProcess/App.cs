@@ -47,6 +47,5 @@ namespace GitFlowProcess
 		void Generate()
 		{
 		}
-
 	}
 }
