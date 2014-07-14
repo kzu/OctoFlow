@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctoFlow.Tests", "src\OctoF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctoFlow.Core", "src\OctoFlow\OctoFlow.Core.csproj", "{6257D573-AC42-44CA-9908-3DB7E49803CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctoFlow.Job", "OctoFlow.Job\OctoFlow.Job.csproj", "{A2023D7C-6400-4A01-8585-1816F7BC7F90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{6257D573-AC42-44CA-9908-3DB7E49803CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6257D573-AC42-44CA-9908-3DB7E49803CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6257D573-AC42-44CA-9908-3DB7E49803CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2023D7C-6400-4A01-8585-1816F7BC7F90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2023D7C-6400-4A01-8585-1816F7BC7F90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2023D7C-6400-4A01-8585-1816F7BC7F90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2023D7C-6400-4A01-8585-1816F7BC7F90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
