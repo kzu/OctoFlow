@@ -85,6 +85,7 @@
     <Compile Include="netfx\System\Collections\Generic\DictionaryGetOrAdd.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="DefaultProviders\TokenProvider.cs" />
+    <Compile Include="SimpleConsoleListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
