@@ -196,7 +196,7 @@ namespace OctoFlow
 				issue.State != ProcessState.Ignore &&
 				issue.Parent == null));
 
-			return result.GroupBy(p => p.GroupLabel);
+            return result.OrderByDescending(p => p.Sort).GroupBy(p => p.Group);
 		}
 
 		private IEnumerable<IGrouping<string, ProcessIssue>> GetDocFlow()
@@ -238,7 +238,7 @@ namespace OctoFlow
 				issue.State != ProcessState.Ignore &&
 				issue.Parent == null));
 
-			return result.GroupBy(p => p.GroupLabel);
+            return result.OrderByDescending(p => p.Sort).GroupBy(p => p.Group);
 		}
 
         private void GroupFromReleaseLabel(ProcessIssue issue)
@@ -248,9 +248,15 @@ namespace OctoFlow
                 .FirstOrDefault(m => m.Success);
 
             if (match != null)
-                issue.GroupLabel = "Release " + match.Groups["version"].Value;
+            {
+                issue.Group = "Release " + match.Groups["version"].Value;
+                issue.Sort = new Version(match.Groups["version"].Value);
+            }
             else
-                issue.GroupLabel = "Unspecified release";
+            {
+                issue.Group = "vNext";
+                issue.Sort = new Version(int.MaxValue, int.MaxValue);
+            }
         }
 
 		class PagedRepositoryIssueRequest : RepositoryIssueRequest

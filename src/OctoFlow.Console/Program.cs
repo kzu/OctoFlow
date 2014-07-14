@@ -11,12 +11,22 @@
 namespace OctoFlow
 {
 	using CLAP;
+    using OctoFlow.Diagnostics;
+    using System;
+    using System.Diagnostics;
+    using System.Linq;
 
     class Program
 	{
 		static void Main(string[] args)
 		{
-			Parser.Run(args, new App());
+            Tracer.Initialize(new TracerManager());
+
+            Parser.Run(args, new App());
+
+#if DEBUG
+            Console.ReadLine();
+#endif
 		}
 	}
 }

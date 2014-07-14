@@ -7,37 +7,42 @@
 
        http://www.apache.org/licenses/LICENSE-2.0
 */
+
 namespace OctoFlow
 {
     using CLAP;
     using CLAP.Validation;
+    using OctoFlow.Diagnostics;
     using Octokit;
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Text;
     using System.Threading.Tasks;
 
-	class App
-	{
-		[Help(Aliases = "?,h")]
-		void Help(string help)
-		{
-			Console.WriteLine(help);
-		}
+    class App
+    {
+        static readonly ITracer tracer = Tracer.Get<App>();
 
-		[Verb(Description = "Generates a status report from GitHub issues.", IsDefault = true)]
-		void Generate(
+        [Help(Aliases = "?,h")]
+        void Help(string help)
+        {
+            Console.WriteLine(help);
+        }
+
+        [Verb(Description = "Generates a status report from GitHub issues.", IsDefault = true)]
+        void Generate(
             [DefaultProvider(typeof(OutDirProvider))]
             [Aliases("d")]
             string outDir,
             [DefaultProvider(typeof(OwnerDefaultProvider))]
             [Aliases("o")]
-            string owner, 
+            string owner,
             [DefaultProvider(typeof(RepoDefaultProvider))]
             [Aliases("r")]
-            string repo, 
+            string repo,
             [DefaultProvider(typeof(TokenProvider))]
             [Aliases("t")]
             string apiToken,
@@ -45,7 +50,9 @@ namespace OctoFlow
             [DefaultValue("180")]
             [Aliases("a")] 
             int maxAge)
-		{
+        {
+            tracer.Info("Generating flows for {0}/{1}...", owner, repo);
+
             var github = new GitHubClient(new ProductHeaderValue("OctoFlow"))
             {
                 Credentials = new Credentials(apiToken)
@@ -55,33 +62,45 @@ namespace OctoFlow
                 github,
                 new ProcessSettings(owner, repo) { MaxAge = TimeSpan.FromDays(maxAge) });
 
+            tracer.Info("Initializing local cache of issues...");
+
             process.Initialize();
 
-            var type = ProcessType.QA;
-			var flow = process.GetFlow(type);
+            GenerateReport(process, ProcessType.QA);
+            GenerateReport(process, ProcessType.Doc);
+
+            tracer.Info("Done.");
+        }
+
+        private static void GenerateReport(ProcessRepository process, ProcessType type)
+        {
+            tracer.Info("Generating report for {0}...", type);
+
+            var flow = process.GetFlow(type);
 
             var generator = new FlowIssueGenerator(type, flow);
 
             var body = generator.Render();
+            var baseDir = GitRepo.Find(".") ?? ".";
+            var output = Path.Combine(baseDir, "~" + type + ".md");
+            File.WriteAllText(output, body, Encoding.UTF8);
+        }
 
-            Console.WriteLine("Generating for {0}/{1}, with token {2}", owner, process, apiToken);
-		}
+        [Verb(Description = "Get the application version.", Aliases = "v")]
+        void Version()
+        {
+            var asm = this.GetType().Assembly;
 
-		[Verb(Description = "Get the application version.", Aliases = "v")]
-		void Version()
-		{
-			var asm = this.GetType().Assembly;
+            Console.Write(asm.GetCustomAttribute<AssemblyTitleAttribute>().Title);
+            Console.Write(" version ");
+            Console.WriteLine(asm.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion);
 
-			Console.Write(asm.GetCustomAttribute<AssemblyTitleAttribute>().Title);
-			Console.Write(" version ");
-			Console.WriteLine(asm.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion);
+            //[Microsoft .NET Framework, version 4.0.30319.34014]
+            Console.Write("[Microsoft .NET Framework, version ");
+            Console.Write(Environment.Version);
+            Console.WriteLine("]");
 
-			//[Microsoft .NET Framework, version 4.0.30319.34014]
-			Console.Write("[Microsoft .NET Framework, version ");
-			Console.Write(Environment.Version);
-			Console.WriteLine("]");
-
-			Console.WriteLine(asm.GetCustomAttribute<AssemblyCopyrightAttribute>().Copyright);
-		}
-	}
+            Console.WriteLine(asm.GetCustomAttribute<AssemblyCopyrightAttribute>().Copyright);
+        }
+    }
 }

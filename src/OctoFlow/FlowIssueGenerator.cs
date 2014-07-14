@@ -21,7 +21,7 @@ namespace OctoFlow
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
+    #line 1 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class FlowIssueGenerator : FlowIssueGeneratorBase
     {
@@ -32,7 +32,7 @@ namespace OctoFlow
         public virtual string TransformText()
         {
             
-            #line 9 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
+            #line 9 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
 
     foreach (var group in Issues)
     {
@@ -42,14 +42,14 @@ namespace OctoFlow
             #line hidden
             this.Write("\r\n# ");
             
-            #line 14 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
+            #line 14 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(group.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\r\n");
             
-            #line 16 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
+            #line 16 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
       
         foreach (var issue in group)
         {
@@ -63,7 +63,7 @@ namespace OctoFlow
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 23 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
+        #line 23 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
 
 public IEnumerable<IGrouping<string, ProcessIssue>> Issues { get; private set; }
 public ProcessType Type { get; private set; }
@@ -89,49 +89,56 @@ private void Render(ProcessIssue issue)
         #line default
         #line hidden
         
-        #line 43 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
+        #line 43 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
 this.Write("## Story #");
 
         
         #line default
         #line hidden
         
-        #line 44 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
+        #line 44 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(issue.Issue.Number));
 
         
         #line default
         #line hidden
         
-        #line 44 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
-this.Write("\r\n");
+        #line 44 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
+this.Write("\r\n- [");
 
         
         #line default
         #line hidden
         
-        #line 45 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(issue.State == ProcessState.Done ? "- [x]" : (issue.State == ProcessState.Ignore ? "" : "- [ ]")));
+        #line 45 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(issue.State == ProcessState.Done ? "x" : " "));
 
         
         #line default
         #line hidden
         
-        #line 45 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
+        #line 45 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
+this.Write("] ");
+
+        
+        #line default
+        #line hidden
+        
+        #line 45 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(issue.Issue.Title));
 
         
         #line default
         #line hidden
         
-        #line 45 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
+        #line 45 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
 this.Write("\r\n");
 
         
         #line default
         #line hidden
         
-        #line 46 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
+        #line 46 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
 
 		if (issue.Children.Any(i => i.State != ProcessState.Ignore))
         {
@@ -140,14 +147,14 @@ this.Write("\r\n");
         #line default
         #line hidden
         
-        #line 49 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
+        #line 49 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
 this.Write("\r\n### Issues\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 53 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
+        #line 53 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
                      
 			foreach (var child in issue.Children.Where(i => i.State != ProcessState.Ignore))
 			{
@@ -162,56 +169,56 @@ this.Write("\r\n### Issues\r\n\r\n");
         #line default
         #line hidden
         
-        #line 62 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
+        #line 62 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
 this.Write("- [");
 
         
         #line default
         #line hidden
         
-        #line 63 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
+        #line 63 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(issue.State == ProcessState.Done ? "x" : " "));
 
         
         #line default
         #line hidden
         
-        #line 63 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
+        #line 63 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
 this.Write("] #");
 
         
         #line default
         #line hidden
         
-        #line 63 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
+        #line 63 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(issue.Issue.Number));
 
         
         #line default
         #line hidden
         
-        #line 63 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
+        #line 63 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
 this.Write(": ");
 
         
         #line default
         #line hidden
         
-        #line 63 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
+        #line 63 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(issue.Issue.Title));
 
         
         #line default
         #line hidden
         
-        #line 63 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
+        #line 63 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
 this.Write("\r\n");
 
         
         #line default
         #line hidden
         
-        #line 64 "C:\Code\Personal\GitFlowProcess\src\OctoFlow\FlowIssueGenerator.tt"
+        #line 64 "C:\Code\Personal\OctoFlow\src\OctoFlow\FlowIssueGenerator.tt"
 
 
 		foreach (var child in issue.Children.Where(i => i.State != ProcessState.Ignore))

@@ -42,7 +42,7 @@ private void Render(ProcessIssue issue)
     {
 #>
 ## Story #<#= issue.Issue.Number #>
-<#=issue.State == ProcessState.Done ? "- [x]" : (issue.State == ProcessState.Ignore ? "" : "- [ ]") #><#= issue.Issue.Title #>
+- [<#=issue.State == ProcessState.Done ? "x" : " " #>] <#= issue.Issue.Title #>
 <#+
 		if (issue.Children.Any(i => i.State != ProcessState.Ignore))
         {

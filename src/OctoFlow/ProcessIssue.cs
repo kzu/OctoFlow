@@ -11,6 +11,7 @@
 namespace OctoFlow
 {
     using Octokit;
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
@@ -45,7 +46,9 @@ namespace OctoFlow
             Children = collection;
         }
 
-        public string GroupLabel { get; set; }
+        public string Group { get; set; }
+        public IComparable Sort { get; set; }
+
         public Issue Issue { get; private set; }
         public IssueType Type { get; set; }
 		public ProcessState State { get; set; }
