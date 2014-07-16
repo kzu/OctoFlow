@@ -24,7 +24,7 @@ namespace OctoFlow
         {
             var gitRoot = GitRepo.Find(".");
             if (string.IsNullOrEmpty(gitRoot))
-                return new DirectoryInfo(".");
+                return new DirectoryInfo(".").FullName;
 
             return gitRoot;
         }
