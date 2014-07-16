@@ -25,7 +25,7 @@ namespace OctoFlow
         {
             var gitDir = GitRepo.Find(".");
             if (gitDir == null)
-                return null;
+                throw new InvalidOperationException("Could not locate a git repository in the current directory or any of its ancestors.");
 
             // Read git repo from current path, if it exists.
             try
