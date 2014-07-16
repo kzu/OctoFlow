@@ -104,14 +104,21 @@ this.Write(this.ToStringHelper.ToStringWithCulture(issue.Issue.Number));
         #line hidden
         
         #line 44 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
-this.Write("\r\n");
+this.Write("\r\n- [");
 
         
         #line default
         #line hidden
         
         #line 45 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(issue.State == ProcessState.Ignore ? "" : (issue.State == ProcessState.Done ? "- [x] " : "- [ ] ")));
+this.Write(this.ToStringHelper.ToStringWithCulture(issue.State == ProcessState.Done ? "x" : " "));
+
+        
+        #line default
+        #line hidden
+        
+        #line 45 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+this.Write("] ");
 
         
         #line default

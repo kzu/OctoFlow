@@ -184,11 +184,13 @@ namespace OctoFlow
 
 			var result = AllIssues.Values.Where(issue =>
 					issue.Type == IssueType.Story &&
-						// Keep stories that aren't ignored
-					(issue.State != ProcessState.Ignore ||
-						// or have at least one non-ignored child
-					 issue.Children.Any(child => child.State != ProcessState.Ignore)
-					 ))
+						// Keep stories that aren't ignored, that is, they are still open
+					issue.State != ProcessState.Ignore
+                        // Open stories aren't ever ready for the next flow, 
+                        // neither any of its child issues. Otherwise, it's 
+                        // just plain confusing.
+                        //issue.Children.Any(child => child.State != ProcessState.Ignore)
+					 )
 					.ToList();
 
 			// Next add all issues that don't have a parent story.
@@ -227,10 +229,12 @@ namespace OctoFlow
 			var result = AllIssues.Values.Where(issue =>
 					issue.Type == IssueType.Story &&
 						// Keep stories that aren't ignored 
-					(issue.State != ProcessState.Ignore ||
-						// or have at least one non-ignored child
-					 issue.Children.Any(child => child.State != ProcessState.Ignore)
-					 ))
+					issue.State != ProcessState.Ignore
+                        // Open stories aren't ever ready for the next flow, 
+                        // neither any of its child issues. Otherwise, it's 
+                        // just plain confusing.
+                        //issue.Children.Any(child => child.State != ProcessState.Ignore)
+					 )
 					.ToList();
 
 			// Next add all issues that don't have a parent story.
