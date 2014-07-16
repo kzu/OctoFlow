@@ -19,7 +19,6 @@
 #>
 
 ## <#=type.Key ? "Stories" :  "Other" #>
-
 <#            
 			foreach (var issue in type.OrderByDescending(x => x.Issue.Number))
 			{
@@ -48,16 +47,16 @@ private void Render(ProcessIssue issue)
 {
     if (issue.Type == IssueType.Story)
     {
+        GenerationEnvironment.AppendLine("");
 #>
+
 ### Story #<#= issue.Issue.Number #>
 - [<#=issue.State == ProcessState.Done ? "x" : " " #>] <#= issue.Issue.Title #>
 <#+
 		if (issue.Children.Any(i => i.State != ProcessState.Ignore))
         {
-#>
-
+#> 
 #### Issues
-
 <#+                     
 			foreach (var child in issue.Children
                 .Where(i => i.State != ProcessState.Ignore)
@@ -70,8 +69,8 @@ private void Render(ProcessIssue issue)
     else
     {
 #>
-- [<#=issue.State == ProcessState.Done ? "x" : " " #>] #<#= issue.Issue.Number #>: <#= issue.Issue.Title #>
-<#+
+
+- [<#=issue.State == ProcessState.Done ? "x" : " " #>] #<#= issue.Issue.Number #>: <#= issue.Issue.Title #><#+
 
 		foreach (var child in issue.Children
             .Where(i => i.State != ProcessState.Ignore)
