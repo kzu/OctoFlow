@@ -78,9 +78,9 @@
     <Compile Include="External\Diagnostics\Tracer\RealtimeTraceListener.cs" />
     <Compile Include="External\Diagnostics\Tracer\SystemDiagnostics\StartActivityExtension.cs" />
     <Compile Include="External\Diagnostics\Tracer\SystemDiagnostics\TracerManager.cs" />
-    <Compile Include="GitRepo.cs" />
     <Compile Include="DefaultProviders\GitProviders.cs" />
     <Compile Include="DefaultProviders\OutDirProvider.cs" />
+    <Compile Include="GitRepo.cs" />
     <Compile Include="netfx\System\AppDomainData.cs" />
     <Compile Include="netfx\System\Collections\Generic\DictionaryGetOrAdd.cs" />
     <Compile Include="Program.cs" />
@@ -102,7 +102,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OctoFlow\OctoFlow.Core.csproj">
+    <ProjectReference Include="..\OctoFlow.Core\OctoFlow.Core.csproj">
       <Project>{6257d573-ac42-44ca-9908-3db7e49803cc}</Project>
       <Name>OctoFlow.Core</Name>
     </ProjectReference>
@@ -116,13 +116,6 @@
     <Error Condition="!Exists('..\..\packages\SemanticGit.1.0.2\build\SemanticGit.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SemanticGit.1.0.2\build\SemanticGit.targets'))" />
   </Target>
   <Import Project="..\..\packages\SemanticGit.1.0.2\build\SemanticGit.targets" Condition="Exists('..\..\packages\SemanticGit.1.0.2\build\SemanticGit.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
   <UsingTask TaskName="TransformXml" AssemblyFile="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Web\Microsoft.Web.Publishing.Tasks.dll" />
   <Target Name="AfterCompile" Condition="Exists('App.$(Configuration).config')">
     <!--Generate transformed app config in the intermediate directory-->

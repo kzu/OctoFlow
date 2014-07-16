@@ -57,7 +57,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OctoFlow\OctoFlow.Core.csproj">
+    <ProjectReference Include="..\OctoFlow.Core\OctoFlow.Core.csproj">
       <Project>{6257d573-ac42-44ca-9908-3db7e49803cc}</Project>
       <Name>OctoFlow.Core</Name>
     </ProjectReference>
