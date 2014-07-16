@@ -88,8 +88,10 @@
     <Compile Include="SimpleConsoleListener.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Apache.licenseheader">
+      <Link>Apache.licenseheader</Link>
+    </None>
     <None Include="App.config" />
-    <None Include="Apache.licenseheader" />
     <None Include="App.Debug.config">
       <DependentUpon>App.config</DependentUpon>
       <SubType>Designer</SubType>

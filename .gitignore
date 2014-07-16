@@ -176,3 +176,4 @@ FakesAssemblies/
 /src/OctoFlow.Console/App.Debug.config
 *.t4properties
 /OctoFlow.Job/App.Debug.config
+/src/OctoFlow.Tests/Token
