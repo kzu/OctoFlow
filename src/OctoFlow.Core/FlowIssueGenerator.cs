@@ -51,10 +51,28 @@ namespace OctoFlow
             
             #line 16 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
       
-        foreach (var issue in group)
+        foreach (var type in group.GroupBy(issue => issue.Type == IssueType.Story))
         {
-			Render(issue);            
-        }
+
+            
+            #line default
+            #line hidden
+            this.Write("\r\n## ");
+            
+            #line 21 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(type.Key ? "Stories" :  "Other"));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\r\n");
+            
+            #line 23 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+            
+			foreach (var issue in type.OrderByDescending(x => x.Issue.Number))
+			{
+				Render(issue);
+			}
+        }    
     }
 
             
@@ -63,7 +81,7 @@ namespace OctoFlow
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 23 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+        #line 31 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
 
 public IEnumerable<IGrouping<string, ProcessIssue>> Issues { get; private set; }
 public ProcessType Type { get; private set; }
@@ -89,56 +107,56 @@ private void Render(ProcessIssue issue)
         #line default
         #line hidden
         
-        #line 43 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
-this.Write("## Story #");
+        #line 51 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+this.Write("### Story #");
 
         
         #line default
         #line hidden
         
-        #line 44 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+        #line 52 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(issue.Issue.Number));
 
         
         #line default
         #line hidden
         
-        #line 44 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+        #line 52 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
 this.Write("\r\n- [");
 
         
         #line default
         #line hidden
         
-        #line 45 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+        #line 53 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(issue.State == ProcessState.Done ? "x" : " "));
 
         
         #line default
         #line hidden
         
-        #line 45 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+        #line 53 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
 this.Write("] ");
 
         
         #line default
         #line hidden
         
-        #line 45 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+        #line 53 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(issue.Issue.Title));
 
         
         #line default
         #line hidden
         
-        #line 45 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+        #line 53 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
 this.Write("\r\n");
 
         
         #line default
         #line hidden
         
-        #line 46 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+        #line 54 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
 
 		if (issue.Children.Any(i => i.State != ProcessState.Ignore))
         {
@@ -147,16 +165,18 @@ this.Write("\r\n");
         #line default
         #line hidden
         
-        #line 49 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
-this.Write("\r\n### Issues\r\n\r\n");
+        #line 57 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+this.Write("\r\n#### Issues\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 53 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+        #line 61 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
                      
-			foreach (var child in issue.Children.Where(i => i.State != ProcessState.Ignore))
+			foreach (var child in issue.Children
+                .Where(i => i.State != ProcessState.Ignore)
+                .OrderByDescending(x => x.Issue.Number))
 			{
 				Render(child);
 			}    
@@ -169,59 +189,61 @@ this.Write("\r\n### Issues\r\n\r\n");
         #line default
         #line hidden
         
-        #line 62 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+        #line 72 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
 this.Write("- [");
 
         
         #line default
         #line hidden
         
-        #line 63 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+        #line 73 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(issue.State == ProcessState.Done ? "x" : " "));
 
         
         #line default
         #line hidden
         
-        #line 63 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+        #line 73 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
 this.Write("] #");
 
         
         #line default
         #line hidden
         
-        #line 63 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+        #line 73 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(issue.Issue.Number));
 
         
         #line default
         #line hidden
         
-        #line 63 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+        #line 73 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
 this.Write(": ");
 
         
         #line default
         #line hidden
         
-        #line 63 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+        #line 73 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(issue.Issue.Title));
 
         
         #line default
         #line hidden
         
-        #line 63 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+        #line 73 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
 this.Write("\r\n");
 
         
         #line default
         #line hidden
         
-        #line 64 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
+        #line 74 "C:\Code\Personal\OctoFlow\src\OctoFlow.Core\FlowIssueGenerator.tt"
 
 
-		foreach (var child in issue.Children.Where(i => i.State != ProcessState.Ignore))
+		foreach (var child in issue.Children
+            .Where(i => i.State != ProcessState.Ignore)
+            .OrderByDescending(x => x.Issue.Number))
 		{
             PushIndent("  ");
 			Render(child);

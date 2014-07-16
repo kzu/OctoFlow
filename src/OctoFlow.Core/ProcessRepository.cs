@@ -56,12 +56,15 @@ namespace OctoFlow
 
 			SetIssueTypes();
 			SetIssueParent();
+
 		}
 
 		public IGitHubClient GitHub { get; private set; }
 		public IDictionary<int, ProcessIssue> AllIssues { get; private set; }
 		public IList<Label> AllLabels { get; private set; }
 		public ProcessSettings Settings { get; private set; }
+
+		private List<ProcessIssue> KnownIssues { get; set; }
 
 		public void Initialize()
 		{
@@ -76,6 +79,7 @@ namespace OctoFlow
 
 			SetIssueTypes();
 			SetIssueParent();
+			KnownIssues = AllIssues.Values.Where(issue => issue.Type != IssueType.Unknown).ToList();
 		}
 
 		public IEnumerable<IGrouping<string, ProcessIssue>> GetFlow(ProcessType type)
@@ -160,7 +164,7 @@ namespace OctoFlow
 		private IEnumerable<IGrouping<string, ProcessIssue>> GetQAFlow()
 		{
 			// Establish the state of all issues WRT to this process flow.
-			foreach (var issue in AllIssues.Values)
+			foreach (var issue in KnownIssues)
 			{
 				if (issue.Issue.Labels.Any(l => string.Equals(l.Name, "-QA", StringComparison.OrdinalIgnoreCase)) ||
 					issue.Issue.State == ItemState.Open)
@@ -194,7 +198,8 @@ namespace OctoFlow
 					.ToList();
 
 			// Next add all issues that don't have a parent story.
-			result.AddRange(AllIssues.Values.Where(issue =>
+			result.AddRange(KnownIssues.Where(issue =>
+				issue.Type != IssueType.Story &&
 				issue.State != ProcessState.Ignore &&
 				issue.Parent == null));
 
@@ -204,7 +209,7 @@ namespace OctoFlow
 		private IEnumerable<IGrouping<string, ProcessIssue>> GetDocFlow()
 		{
 			// Establish the state of all issues WRT to this process flow.
-			foreach (var issue in AllIssues.Values)
+			foreach (var issue in KnownIssues)
 			{
 				if (issue.Issue.State == ItemState.Open || 
 					!issue.Issue.Labels.Any(l => 
@@ -238,7 +243,8 @@ namespace OctoFlow
 					.ToList();
 
 			// Next add all issues that don't have a parent story.
-			result.AddRange(AllIssues.Values.Where(issue =>
+			result.AddRange(KnownIssues.Where(issue =>
+				issue.Type != IssueType.Story &&
 				issue.State != ProcessState.Ignore &&
 				issue.Parent == null));
 

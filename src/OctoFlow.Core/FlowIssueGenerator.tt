@@ -14,10 +14,18 @@
 # <#= group.Key #>
 
 <#      
-        foreach (var issue in group)
+        foreach (var type in group.GroupBy(issue => issue.Type == IssueType.Story))
         {
-			Render(issue);            
-        }
+#>
+
+## <#=type.Key ? "Stories" :  "Other" #>
+
+<#            
+			foreach (var issue in type.OrderByDescending(x => x.Issue.Number))
+			{
+				Render(issue);
+			}
+        }    
     }
 #>
 <#+
@@ -41,17 +49,19 @@ private void Render(ProcessIssue issue)
     if (issue.Type == IssueType.Story)
     {
 #>
-## Story #<#= issue.Issue.Number #>
+### Story #<#= issue.Issue.Number #>
 - [<#=issue.State == ProcessState.Done ? "x" : " " #>] <#= issue.Issue.Title #>
 <#+
 		if (issue.Children.Any(i => i.State != ProcessState.Ignore))
         {
 #>
 
-### Issues
+#### Issues
 
 <#+                     
-			foreach (var child in issue.Children.Where(i => i.State != ProcessState.Ignore))
+			foreach (var child in issue.Children
+                .Where(i => i.State != ProcessState.Ignore)
+                .OrderByDescending(x => x.Issue.Number))
 			{
 				Render(child);
 			}    
@@ -63,7 +73,9 @@ private void Render(ProcessIssue issue)
 - [<#=issue.State == ProcessState.Done ? "x" : " " #>] #<#= issue.Issue.Number #>: <#= issue.Issue.Title #>
 <#+
 
-		foreach (var child in issue.Children.Where(i => i.State != ProcessState.Ignore))
+		foreach (var child in issue.Children
+            .Where(i => i.State != ProcessState.Ignore)
+            .OrderByDescending(x => x.Issue.Number))
 		{
             PushIndent("  ");
 			Render(child);
